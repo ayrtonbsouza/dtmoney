@@ -1,23 +1,42 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createServer } from 'miragejs';
+import { createServer, Model } from 'miragejs';
 import { App } from './App';
 
 createServer({
+  models: {
+    transaction: Model,
+  },
+  seeds(server) {
+    server.db.loadData({
+      transactions: [
+        {
+          id: 1,
+          title: 'Vigil',
+          type: 'deposit',
+          category: 'Salário',
+          amount: 20000,
+          createdAt: new Date('2021-02-12 09:00:00'),
+        },
+        {
+          id: 2,
+          title: 'Pagamento de Fatura',
+          type: 'withdraw',
+          category: 'Crédito',
+          amount: 4800,
+          createdAt: new Date('2021-02-12 09:00:00'),
+        },
+      ],
+    });
+  },
   routes() {
     this.namespace = 'api';
-
-    this.get('/transactions', () => [
-      {
-        id: 1,
-        title: 'Transaction 1',
-        amount: 400,
-        type: 'deposit',
-        category: 'Food',
-        createdAt: new Date(),
-      },
-    ]);
+    this.get('/transactions', () => this.schema.all('transaction'));
+    this.post('/transactions', (schema, request) => {
+      const data = JSON.parse(request.requestBody);
+      return schema.create('transaction', data);
+    });
   },
 });
 
