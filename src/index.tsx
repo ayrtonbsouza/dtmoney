@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-use-before-define
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createServer } from 'miragejs';
@@ -7,24 +8,22 @@ createServer({
   routes() {
     this.namespace = 'api';
 
-    this.get('/transactions', () => {
-      return [
-        {
-          id: 1,
-          title: 'Transaction 1',
-          amount: 400,
-          type: 'deposit',
-          category: 'Food',
-          createdAt: new Date()
-        }
-      ]
-    })
-  }
-})
+    this.get('/transactions', () => [
+      {
+        id: 1,
+        title: 'Transaction 1',
+        amount: 400,
+        type: 'deposit',
+        category: 'Food',
+        createdAt: new Date(),
+      },
+    ]);
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
