@@ -6,7 +6,7 @@ import { TransactionsContext } from '../../context/Transactions';
 import { Container } from './styles';
 
 export const Summary: React.FC = () => {
-  const transactions = useContext(TransactionsContext);
+  const { transactions } = useContext(TransactionsContext);
   // console.log(transactions);
   return (
     <Container>

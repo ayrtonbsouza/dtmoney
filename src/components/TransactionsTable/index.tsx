@@ -3,7 +3,7 @@ import { TransactionsContext } from '../../context/Transactions';
 import { Container } from './styles';
 
 export const TransactionsTable: React.FC = () => {
-  const transactions = useContext(TransactionsContext);
+  const { transactions } = useContext(TransactionsContext);
   return (
     <Container>
       <table>
