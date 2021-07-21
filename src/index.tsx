@@ -13,7 +13,7 @@ createServer({
       transactions: [
         {
           id: 1,
-          title: 'Vigil',
+          title: 'Trampo',
           type: 'deposit',
           category: 'Salário',
           amount: 20000,
