@@ -4,7 +4,6 @@ import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import { TransactionsContext } from '../../context/Transactions';
-import { api } from '../../services/api';
 import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
 interface Props {
@@ -25,14 +24,19 @@ export const NewTransactionModal: React.FC<Props> = ({
   const [category, setCategory] = useState('');
   const [type, setType] = useState('deposit');
 
-  function handleCreateNewTransaction(event: FormEvent): void {
+  async function handleCreateNewTransaction(event: FormEvent): Promise<void> {
     event.preventDefault();
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       category,
       type,
     });
+    setTitle('');
+    setAmount(0);
+    setCategory('');
+    setType('deposit');
+    onRequestClose();
   }
 
   return (
